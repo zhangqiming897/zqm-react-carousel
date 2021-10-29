@@ -1,0 +1,18 @@
+{
+  "name": "zqm-react-carousel",
+  "version": "1.0.1",
+  "description": "可配置化的轮播图",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm tun test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhangqiming897"
+  },
+  "keywords": [
+    "zqm-react-carousel"
+  ],
+  "author": "zhangbanxian",
+  "license": "ISC"
+}
