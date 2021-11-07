@@ -1,6 +1,6 @@
 // 轮播图组件
 import React, { Component } from 'react';
-import styles from './carousel.module.css';
+import styles from './carousel.module.less';
 
 class Carousel extends Component {
     constructor(props) {
