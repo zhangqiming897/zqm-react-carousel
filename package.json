@@ -3,7 +3,9 @@
   "version": "1.0.1",
   "description": "可配置化的轮播图",
   "main": "build/bundle.js",
-  "files": ["build"],
+  "files": [
+    "build"
+  ],
   "scripts": {
     "start": "webpack-dev-server --config ./build/webpack.dev.config.js",
     "dev": "webpack-dev-server --config ./build/webpack.dev.config.js",
@@ -19,21 +21,21 @@
   "author": "zhangbanxian",
   "license": "ISC",
   "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
     "@babel/preset-react": "^7.16.0",
     "@types/react": "^17.0.34",
     "@types/react-dom": "^17.0.11",
     "babel-loader": "^8.2.3",
-    "chai": "^4.3.4",
-    "coveralls": "^3.1.1",
     "css-loader": "^6.5.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "html-webpack-plugin": "^5.5.0",
     "style-loader": "^3.3.1",
-    "ts-loader": "^9.2.6",
-    "typescript": "^4.4.4",
-    "webpack": "^5.61.0",
-    "webpack-cli": "^4.9.1"
+    "webpack": "^5.62.1",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.4.0"
   }
 }

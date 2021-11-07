@@ -1,5 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const App = () => {
+  return <div>轮播图插件化开发</div>;
+};
+
+ReactDOM.render(<App />, document.getElementById("root"));
