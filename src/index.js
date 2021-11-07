@@ -1,9 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Carousel from "./carousel";
 
-const App = () => {
-  return <Carousel />;
-};
+class App extends Component {
+   render() {
+     return <Carousel />
+   }
+}
 
 ReactDOM.render(<App />, document.getElementById("root"));
