@@ -1,0 +1,14 @@
+language: node_js # 运行环境
+node_js:
+  - "10.6.0" # 版本
+branches:
+  only:
+  - master # 只有主支可以
+before_install:
+    - export TZ='Asia/Shanghai' # 如果你的项目里涉及到时间处理，这里需要设置时区
+install: yarn install # 安装 npm 包
+script: # 执行命令
+  - yarn run build # 打包
+  - yarn run test # 测试
+after_success: # 成功之后执行如下命令
+  - yarn run coveralls # 测试代码覆盖率
