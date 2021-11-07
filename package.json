@@ -2,11 +2,12 @@
   "name": "zqm-react-carousel",
   "version": "1.0.1",
   "description": "可配置化的轮播图",
-  "main": "index.js",
+  "main": "build/bundle.js",
+  "files": ["build"],
   "scripts": {
-    "build": "webpack --config webpack.config.js --progress --colors",
-    "test": "jest ./test/carousel.test.js"
-
+    "start": "webpack-dev-server --config ./build/webpack.dev.config.js",
+    "dev": "webpack-dev-server --config ./build/webpack.dev.config.js",
+    "build": "webpack --config ./build/webpack.prod.config.js"
   },
   "repository": {
     "type": "git",

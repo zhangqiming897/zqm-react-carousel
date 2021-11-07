@@ -3,7 +3,7 @@ const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
     mode: 'production',
-    entry: './src/autosuggest.js',
+    entry: './src/index.js',
     output: {
         filename: 'bundle.js',
         path: path.resolve(_dirname, './build'),
