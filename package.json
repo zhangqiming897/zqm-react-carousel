@@ -7,7 +7,8 @@
     "build"
   ],
   "scripts": {
-    "dev": "webpack-dev-server --config ./config/webpack.dev.config.js --open --port 3000 --hot",
+    "start": "webpack-dev-server --config ./config/webpack.dev.config.js --inline --open",
+    "dev": "webpack --config ./config/webpack.dev.config.js",
     "build": "webpack --config ./config/webpack.prod.config.js"
   },
   "repository": {
@@ -30,6 +31,7 @@
     "@types/react": "^17.0.34",
     "@types/react-dom": "^17.0.11",
     "babel-loader": "^8.2.3",
+    "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.5.1",
     "html-webpack-plugin": "^5.5.0",
     "style-loader": "^3.3.1",

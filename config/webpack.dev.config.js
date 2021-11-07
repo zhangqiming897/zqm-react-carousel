@@ -3,7 +3,7 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    entry: path.resolve(__dirname, '../src/index.js'),
+    entry: path.join(__dirname, '../src/index.js'),
     output: {
         filename: 'index.js',
         path: path.resolve(__dirname, '../dist')
@@ -23,8 +23,14 @@ module.exports = {
     },
     plugins: [
         new htmlWebpackPlugin({
-            template: path.resolve(__dirname, '../public/index.html'),
+            template: path.resolve(__dirname, '../public'),
             filename: 'index.html'
         })
-    ]
+    ],
+    devServer: {
+      host: 'localhost',
+      inline: true,
+      port: 3000,
+      contentBase: path.resolve(__dirname, '../public')
+    }
 }
