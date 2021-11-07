@@ -1,5 +1,6 @@
 // 轮播图组件
 import React, { Component } from 'react';
+import styles from './carousel.module.css';
 
 class Carousel extends Component {
     constructor(props) {
@@ -7,7 +8,7 @@ class Carousel extends Component {
     }
     render() {
         return (
-            <div>修订的轮播图组件可以使用</div>
+            <div className={styles.carousel}>修订的轮播图组件可以使用</div>
         )
     }
 }
