@@ -23,14 +23,13 @@ module.exports = {
     },
     plugins: [
         new htmlWebpackPlugin({
-            template: path.resolve(__dirname, '../public'),
+            template: path.resolve(__dirname, '../public/index.html'),
             filename: 'index.html'
         })
     ],
     devServer: {
-      host: 'localhost',
-      inline: true,
       port: 3000,
-      contentBase: path.resolve(__dirname, '../public')
+      open: true,
+      hot: true
     }
 }

@@ -1,13 +1,13 @@
 const path = require('path');
 // 导入每次删除文件夹的插件
-const cleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     mode: 'production',
-    entry: path.join(_dirname, '../src/index.js'),
+    entry: path.join(__dirname, '../src/index.js'),
     output: {
         filename: 'index.js',
-        path: path.resolve(_dirname, '../lib'),
+        path: path.resolve(__dirname, '../lib'),
         libraryTarget: 'umd',
         library: 'ReactCmp'
     },
@@ -25,6 +25,6 @@ module.exports = {
         ]
     },
     plugins: [ // 插件
-      new cleanWebpackPlugin(['../lib'])
+      new CleanWebpackPlugin()
     ]
 }

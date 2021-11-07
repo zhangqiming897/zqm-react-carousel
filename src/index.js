@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Carousel from "./carousel";
 
 const App = () => {
-  return <div>轮播图插件化开发</div>;
+  return <Carousel />;
 };
 
 ReactDOM.render(<App />, document.getElementById("root"));
