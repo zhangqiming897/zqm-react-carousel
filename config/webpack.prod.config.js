@@ -26,7 +26,7 @@ module.exports = {
         use: [
           { loader: "style-loader" },
           {
-            loader: "css-laoder",
+            loader: "css-loader",
             options: {
               modules: true,
             },
