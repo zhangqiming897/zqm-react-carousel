@@ -8,7 +8,7 @@ class Carousel extends Component {
     }
     render() {
         return (
-            <div className={styles.carousel}>修订的轮播图组件可以使用</div>
+            <div className={styles.carousel}></div>
         )
     }
 }
