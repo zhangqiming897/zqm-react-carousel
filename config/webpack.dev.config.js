@@ -4,17 +4,32 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "development",
-  entry: path.join(__dirname, "../src/index.js"),
+  entry: path.join(__dirname, "../src/index.tsx"),
   output: {
     filename: "index.js",
     path: path.resolve(__dirname, "../dist"),
+  },
+  resolve: {
+    // 需要解析的扩展名
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
   module: {
     rules: [
       {
         test: /(\.jsx|\.js)$/,
-        use: "babel-loader",
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+          },
+        },
         exclude: "/node_modules/",
+      },
+      // 使用 ts
+      {
+        test: /(\.tsx|\.ts)$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
       },
       {
         test: /(\.css|.less)$/,
@@ -47,7 +62,7 @@ module.exports = {
     }),
   ],
   devServer: {
-    port: 3000,
+    port: 8000,
     open: true,
     hot: true,
   },
