@@ -14,6 +14,10 @@ module.exports = {
     libraryTarget: "umd",
     library: "ReactCmp",
   },
+  resolve: {
+    // 需要解析的扩展名
+    extensions: [".js", ".jsx", ".ts", ".tsx"]
+  },
   module: {
     rules: [
       {

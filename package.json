@@ -1,7 +1,7 @@
 {
   "name": "zqm-react-carousel",
-  "version": "1.0.9",
-  "description": "轮播图插件修改",
+  "version": "1.1.0",
+  "description": "轮播图采用ts编码",
   "main": "lib/index.js",
   "files": [
     "lib"
