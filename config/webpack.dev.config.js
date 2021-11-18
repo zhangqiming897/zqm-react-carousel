@@ -19,14 +19,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /(\.jsx|\.js)$/,
+        test: /\.js(x)$/,
         use: {
           loader: "babel-loader",
           options: {
             presets: [
               "@babel/preset-env",
-              "@babel/preset-react",
-              // "@babel/preset-typescript",
+              "@babel/preset-react"
             ],
           },
         },
@@ -34,7 +33,7 @@ module.exports = {
       },
       // 使用 ts
       {
-        test: /(\.tsx|\.ts)$/,
+        test: /\.ts(x)$/,
         use: "ts-loader",
         exclude: /node_modules/,
       },
