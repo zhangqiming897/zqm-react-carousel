@@ -11,7 +11,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"), // 路径映射
+      "@": path.resolve(__dirname, "../src/"), // 路径映射
     },
     // 需要解析的扩展名
     extensions: [".js", ".jsx", ".ts", ".tsx"],
