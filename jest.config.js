@@ -4,22 +4,31 @@
  */
 
 module.exports = {
-  preset: "ts-jest",
+  preset: 'ts-jest',
+  globals: {
+    'ts-jest': {
+      isolatedModules: true
+    }
+  },
   testMatch: [
     "<rootDir>/test/**/*.(spec|test).js?(x)",
-    "<rootDir>/test/**/*.(spec|test).ts?(x)"
+    // "<rootDir>/test/**/*.(spec|test).ts?(x)"
   ],
   transform: {
     // 将.js后缀的文件使用babel-jest处理
-    "^.+\\.(js|jsx)$": "babel-jest",
+    "^.+\\.js$": "babel-jest",
     "^.+\\.(ts|tsx)$": "ts-jest",
+  },
+  moduleNameMapper: {
+    "\\.(s?css|less)$": "identity-obj-proxy"
   },
   // 下面非要从重要, 将不忽略 lodash-es, other-es-lib 这些es库, 从而使babel-jest去处理它们
   transformIgnorePatterns: [
     "<rootDir>/node_modules/(?!(lodash-es|other-es-lib))",
   ],
-  testEnvironment: 'jsdom',
+  // testEnvironment: 'jsdom',
   moduleFileExtensions: ['js','json','jsx','node', 'ts', 'tsx'],
+  moduleDirectories: ['node_modules', 'bowser_components', 'shared'],
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -34,6 +43,11 @@ module.exports = {
 
   // Indicates whether the coverage information should be collected while executing the test
   collectCoverage: true,
+  collectCoverageFrom: [
+    '**/*.{ts, tsx}',
+    '!**/node_modules/**',
+    '!**/[directory path]/**',
+  ],
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   // collectCoverageFrom: undefined,
