@@ -4,10 +4,20 @@
  */
 
 module.exports = {
+  verbose: true,
   preset: 'ts-jest',
+  clearMocks: true,
+  coverageDirectory: "coverage",
+  testEnvironment: "jsdom",
+  moduleFileExtensions: ['ts', 'js', 'json', 'tsx'],
+  moduleDirectories: ['node_modules', 'src'],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1'
+  },
+  setupFiles: ['./test/setup.js'],
   globals: {
     'ts-jest': {
-      isolatedModules: true
+       tsconfig: 'tsconfig.json'
     }
   },
   testMatch: [
@@ -16,19 +26,12 @@ module.exports = {
   ],
   transform: {
     // 将.js后缀的文件使用babel-jest处理
-    "^.+\\.js$": "babel-jest",
-    "^.+\\.(ts|tsx)$": "ts-jest",
-  },
-  moduleNameMapper: {
-    "\\.(s?css|less)$": "identity-obj-proxy"
+    "^.+\\.js$": "babel-jest"
   },
   // 下面非要从重要, 将不忽略 lodash-es, other-es-lib 这些es库, 从而使babel-jest去处理它们
   transformIgnorePatterns: [
     "<rootDir>/node_modules/(?!(lodash-es|other-es-lib))",
   ],
-  // testEnvironment: 'jsdom',
-  moduleFileExtensions: ['js','json','jsx','node', 'ts', 'tsx'],
-  moduleDirectories: ['node_modules', 'bowser_components', 'shared'],
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -38,22 +41,11 @@ module.exports = {
   // The directory where Jest should store its cached dependency information
   // cacheDirectory: "C:\\Users\\张启明\\AppData\\Local\\Temp\\jest",
 
-  // Automatically clear mock calls and instances between every test
-  clearMocks: true,
-
   // Indicates whether the coverage information should be collected while executing the test
   collectCoverage: true,
-  collectCoverageFrom: [
-    '**/*.{ts, tsx}',
-    '!**/node_modules/**',
-    '!**/[directory path]/**',
-  ],
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   // collectCoverageFrom: undefined,
-
-  // The directory where Jest should output its coverage files
-  coverageDirectory: "coverage",
 
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
