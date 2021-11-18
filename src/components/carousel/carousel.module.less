@@ -1,12 +1,32 @@
-@height: 200px;
+@height: 300px;
 
 .carousel {
-    height: @height;
-    text-align: center;
-    background: #1e80ff96;
-    color: cornsilk;
-    letter-spacing: 1px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+.carouseul {
+  position: relative;
+  height: @height;
 }
 .carouseli {
-    
+  height: @height;
+  width: 100%;
+  position: absolute;
+}
+.carouseText {
+  font-size: 50px;
+  font-weight: bold;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.carouselCz {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.carouselCz p {
+  margin: 15px;
 }
