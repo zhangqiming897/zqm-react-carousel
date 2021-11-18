@@ -5,7 +5,12 @@
     "target": "ES5",
     "esModuleInterop": true,
     "strict": true,
-    "allowJs": true
+    "allowJs": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
+  "include": ["src/*", "src/**/*/.tsx"],
   "exclude": ["node_modules", "dist", "lib", "config", "test"]
 }

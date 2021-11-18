@@ -10,6 +10,9 @@ module.exports = {
     path: path.resolve(__dirname, "../dist"),
   },
   resolve: {
+    alias: {
+       "@": path.resolve(__dirname, "src"), // 路径映射
+    },
     // 需要解析的扩展名
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
@@ -23,6 +26,7 @@ module.exports = {
             presets: [
               "@babel/preset-env",
               { targets: { node: "current" } },
+              "@babel/preset-typescript",
               "@babel/preset-react",
             ],
           },
