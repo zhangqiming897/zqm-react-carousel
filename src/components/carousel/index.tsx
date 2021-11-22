@@ -33,7 +33,7 @@ const Carousel = (): ReactElement => {
 
     // 返回
     const prevFunc = () => {
-        let prevStep = controls ? (controls - 1) % newImgSize : newImgSize - 1;
+        let prevStep: number = controls ? (controls - 1) % newImgSize : newImgSize - 1;
         setAnimate({ transform: `${100 * prevStep}%`, transition: `${transitionTime / 1000}s` });
         if (prevStep == 0) {
             setTimeout(() => {
@@ -45,7 +45,7 @@ const Carousel = (): ReactElement => {
 
     // 前进
     const nextFunc = () => {
-        let nextStep = (controls + 1) % newImgSize;
+        let nextStep: number = (controls + 1) % newImgSize;
         setAnimate({ transform: `${100 * nextStep}%`, transition: `${transitionTime / 1000}s` });
         if (nextStep == newImgSize - 1) {
             setTimeout(() => {
