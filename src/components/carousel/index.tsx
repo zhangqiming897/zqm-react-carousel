@@ -8,25 +8,17 @@ interface imgListType {
 }
 
 const Carousel = (): ReactElement => {
-    const imgList: Array<imgListType> = [
-        {
-            state: 1
-        },
-        {
-            state: 2
-        },
-        {
-            state: 3
-        },
-        {
-            state: 4
-        }
-    ];
-    let imgSize: number = imgList.length;
-    let newImgList: Array<imgListType> = [imgList[imgSize - 1]].concat(imgList).concat([imgList[0]]);
-    let newImgSize: number = newImgList.length;
-    let transitionTime: number = 500;
 
+    // 定义常量
+    const imgList: Array<imgListType> = [{ state: 1 }, { state: 2 }, { state: 3 }, { state: 4 }];
+    const imgSize: number = imgList.length;
+    const prevSeize: imgListType = imgList[imgSize - 1];
+    const nextSeize: imgListType = imgList[0];
+    const newImgList: Array<imgListType> = [prevSeize].concat(imgList).concat([nextSeize]);
+    const newImgSize: number = newImgList.length;
+    const transitionTime: number = 500;
+
+    // 声明状态属性
     let [controls, setControls] = useState(1);
     let [carouselImg, setCarouselImg] = useState(newImgList);
     let [animate, setAnimate] = useState({ transform: '100%', transition: '' });
@@ -55,8 +47,8 @@ const Carousel = (): ReactElement => {
         return nextStep == newImgSize - 1 ? setControls(1) : setControls(nextStep);
     }
 
-    // 按钮切换
-    const btnConvert = (convertIndex: number) => {
+    // Tab切换
+    const tabConvert = (convertIndex: number) => {
         setAnimate({ transform: `${100 * convertIndex}%`, transition: `${transitionTime / 1000}s` })
         setControls(convertIndex);
     }
@@ -75,7 +67,7 @@ const Carousel = (): ReactElement => {
             <div className={styles.carouselSzul}>
                 {
                     imgList.map((item, index) => {
-                        return <div className={`${styles.carouselSzli} ${item.state == Math.abs(controls % imgSize ? controls % imgSize : imgSize) ? styles.carouselSzliActive : null}`} key={index} onClick={() => btnConvert(item.state)} />
+                        return <div className={`${styles.carouselSzli} ${item.state == Math.abs(controls % imgSize ? controls % imgSize : imgSize) ? styles.carouselSzliActive : null}`} key={index} onClick={() => tabConvert(item.state)} />
                     })
                 }
             </div>
