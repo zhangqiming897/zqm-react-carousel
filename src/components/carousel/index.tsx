@@ -4,59 +4,69 @@ import styles from './carousel.module.less';
 
 
 interface imgListType {
-    img: string,
-    state: number,
-    opacity: number
+    state: number
 }
 
 const Carousel = (): ReactElement => {
     const imgList: Array<imgListType> = [
         {
-            img: '#1e80ff',
-            state: 1,
-            opacity: 1,
+            state: 1
         },
         {
-            img: '#f35353',
-            state: 2,
-            opacity: 0,
+            state: 2
         },
         {
-            img: '#44b9a4',
-            state: 3,
-            opacity: 0,
+            state: 3
         },
         {
-            img: '#4e5969',
-            state: 4,
-            opacity: 0,
+            state: 4
         }
     ];
-
     let imgSize: number = imgList.length;
+    let newImgList: Array<imgListType> = [imgList[imgSize - 1]].concat(imgList).concat([imgList[0]]);
+    let newImgSize: number = newImgList.length;
+    let transitionTime: number = 500;
 
     let [controls, setControls] = useState(1);
-    let [carouselImg, setCarouselImg] = useState(imgList);
-    let [transform, setTransform] = useState('0');
+    let [carouselImg, setCarouselImg] = useState(newImgList);
+    let [animate, setAnimate] = useState({ transform: '100%', transition: '' });
 
-    useEffect(() => {
+    // 返回
+    const prevFunc = () => {
+        let prevStep = controls ? (controls - 1) % newImgSize : newImgSize - 1;
+        setAnimate({ transform: `${100 * prevStep}%`, transition: `${transitionTime / 1000}s` });
+        if (prevStep == 0) {
+            setTimeout(() => {
+                setAnimate({ transform: `${100 * imgSize}%`, transition: '' })
+            }, transitionTime)
+        };
+        return prevStep == 0 ? setControls(imgSize) : setControls(prevStep);
+    }
 
-        let convert: number = Math.abs(controls ? controls : imgSize);
+    // 前进
+    const nextFunc = () => {
+        let nextStep = (controls + 1) % newImgSize;
+        setAnimate({ transform: `${100 * nextStep}%`, transition: `${transitionTime / 1000}s` });
+        if (nextStep == newImgSize - 1) {
+            setTimeout(() => {
+                setAnimate({ transform: `100%`, transition: '' });
+            }, transitionTime)
+        }
+        return nextStep == newImgSize - 1 ? setControls(1) : setControls(nextStep);
+    }
 
-        let changeImgList: Array<imgListType> = imgList.map((item: imgListType) => {
-            if(Object.is(item.state, convert)) setTransform(`${100 * (convert - 1) }%`);
-            return Object.is(item.state, convert) ? Object.assign(item, { opacity: 1 }) : Object.assign(item, { opacity: 0 })
-        })
-        
-        setCarouselImg(changeImgList);
-    }, [controls])
+    // 按钮切换
+    const btnConvert = (convertIndex: number) => {
+        setAnimate({ transform: `${100 * convertIndex}%`, transition: `${transitionTime / 1000}s` })
+        setControls(convertIndex);
+    }
 
     return (
         <div className={styles.carousel}>
-            <div className={styles.carouseul} style={{ width: `${ 100 * imgSize }%` }}>
+            <div className={styles.carouseul} style={{ width: `${100 * newImgSize}%` }}>
                 {
                     carouselImg.map((item, index) => {
-                        return <div className={styles.carouseli} key={index} style={{ width: `calc(100% / ${imgSize})`, background: item.img, opacity: item.opacity, transform: `translateX(-${transform})` }}>
+                        return <div className={styles.carouseli} key={index} style={{ width: `calc(100% / ${newImgSize})`, transform: `translateX(-${animate.transform})`, transition: animate.transition }}>
                             <div className={styles.carouseText}>{item.state}</div>
                         </div>
                     })
@@ -64,14 +74,14 @@ const Carousel = (): ReactElement => {
             </div>
             <div className={styles.carouselSzul}>
                 {
-                    carouselImg.map((item, index) => {
-                        return <div className={`${styles.carouselSzli} ${item.state == Math.abs(controls ? controls : imgSize) ? styles.carouselSzliActive : null}`} key={index} onClick={() => setControls(item.state)} />
+                    imgList.map((item, index) => {
+                        return <div className={`${styles.carouselSzli} ${item.state == Math.abs(controls % imgSize ? controls % imgSize : imgSize) ? styles.carouselSzliActive : null}`} key={index} onClick={() => btnConvert(item.state)} />
                     })
                 }
             </div>
             <div className={styles.carouselCz}>
-                <p onClick={() => setControls(controls ? (controls - 1) % imgSize : imgSize - 1)}>返回</p>
-                <p onClick={() => setControls((controls + 1) % imgSize)}>前进</p>
+                <p onClick={prevFunc}>返回</p>
+                <p onClick={nextFunc}>前进</p>
             </div>
         </div>
     )
