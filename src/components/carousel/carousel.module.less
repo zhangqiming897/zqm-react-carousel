@@ -3,6 +3,8 @@
 .carousel {
   text-align: center;
   letter-spacing: 1px;
+  width: 100%;
+  overflow: hidden;
 }
 .carouseul {
   position: relative;
@@ -10,8 +12,8 @@
 }
 .carouseli {
   height: @height;
-  width: 100%;
-  position: absolute;
+  display: inline-block;
+  transition: opacity 2s, transform 1s;
 }
 .carouseText {
   font-size: 50px;
@@ -21,6 +23,24 @@
   align-items: center;
   justify-content: center;
   color: #fff;
+}
+.carouselSzul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.carouselSzul .carouselSzli {
+  padding: 10px;
+  margin: 10px;
+  border: 2px solid rgb(118 159 236);
+  width: 50px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.carouselSzul .carouselSzliActive {
+  background-color: rgb(118 159 236);
+  color: #fff;
+  border-radius: 5px;
 }
 .carouselCz {
   display: flex;
