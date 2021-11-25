@@ -78,7 +78,7 @@ const Carousel = (props: propsInfoType): ReactElement => {
                     })
                 }
             </div>
-            <div className={styles.carouselSzul}>
+            <div className={styles.carouselSzul} style={{ left: `calc(50% - ${82 * imgSize}px / 2)` }}>
                 {
                     imgList.map((item, index) => {
                         return <div className={`${styles.carouselSzli} ${item.state == Math.abs(controls % imgSize ? controls % imgSize : imgSize) ? styles.carouselSzliActive : null}`} key={index} onClick={() => tabConvert(item.state)} />
