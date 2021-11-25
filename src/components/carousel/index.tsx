@@ -9,13 +9,14 @@ interface imgListType {
 
 interface propsInfoType {
     imgArr?: Array<string>,
-    height?: number
+    height?: number,
+    transition?: number
 }
 
 const Carousel = (props: propsInfoType): ReactElement => {
 
     // 定义props
-    const { imgArr, height } = props;
+    const { imgArr, height, transition } = props;
 
     // 图片高度设置
     const imgHeight: number = height ? height : 500;
@@ -29,7 +30,7 @@ const Carousel = (props: propsInfoType): ReactElement => {
     // 图片无缝切换设置
     const newImgList: Array<imgListType> = [imgList[imgSize - 1]].concat(imgList).concat([imgList[0]]);
     const newImgSize: number = newImgList.length;
-    const transitionTime: number = 500;
+    const transitionTime: number = transition ? transition : 500;
 
     // 声明状态属性
     let [controls, setControls] = useState(1);
