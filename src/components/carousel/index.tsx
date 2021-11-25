@@ -2,7 +2,6 @@
 import React, { ReactElement, useState } from 'react';
 import styles from './carousel.module.less';
 
-
 interface imgListType {
     state: number,
     img?: string
@@ -22,9 +21,9 @@ const Carousel = (props: propsInfoType): ReactElement => {
     const imgHeight: number = height ? height : 500;
 
     // 图片展示设置
-    const imgList: Array<imgListType> = imgArr ? 
-    imgArr.map((item, index) => { return { state: index + 1, img: item } }) 
-    : [{ state: 1 }, { state: 2 }, { state: 3 }];
+    const imgList: Array<imgListType> = imgArr ?
+        imgArr.map((item, index) => { return { state: index + 1, img: item } })
+        : new Array(3).fill(1).map((item, index) => { return { state: index + 1 } })
     const imgSize: number = imgList.length;
 
     // 图片无缝切换设置
@@ -68,7 +67,7 @@ const Carousel = (props: propsInfoType): ReactElement => {
 
     return (
         <div className={styles.carousel}>
-            <div className={styles.carouseul} style={{ height:`${imgHeight}px`, width: `${100 * newImgSize}%` }}>
+            <div className={styles.carouseul} style={{ height: `${imgHeight}px`, width: `${100 * newImgSize}%` }}>
                 {
                     newImgList.map((item, index) => {
                         return <div className={styles.carouseli} key={index} style={{ width: `calc(100% / ${newImgSize})`, transform: `translateX(-${animate.transform})`, transition: animate.transition }}>
