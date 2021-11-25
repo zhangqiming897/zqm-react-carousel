@@ -1,5 +1,5 @@
 // 轮播图组件
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { ReactElement, useState } from 'react';
 import styles from './carousel.module.less';
 
 
@@ -18,17 +18,17 @@ const Carousel = (props: propsInfoType): ReactElement => {
     // 定义props
     const { imgArr, height } = props;
 
-     
-    // 定义常量
-    const imgList: Array<imgListType> = imgArr ? 
-    imgArr.map((item, index) => { return { state: index + 1, img: item } }) : [
-        { state: 1 }, { state: 2 }, { state: 3 }
-    ];
+    // 图片高度设置
     const imgHeight: number = height ? height : 500;
+
+    // 图片展示设置
+    const imgList: Array<imgListType> = imgArr ? 
+    imgArr.map((item, index) => { return { state: index + 1, img: item } }) 
+    : [{ state: 1 }, { state: 2 }, { state: 3 }];
     const imgSize: number = imgList.length;
-    const prevSeize: imgListType = imgList[imgSize - 1];
-    const nextSeize: imgListType = imgList[0];
-    const newImgList: Array<imgListType> = [prevSeize].concat(imgList).concat([nextSeize]);
+
+    // 图片无缝切换设置
+    const newImgList: Array<imgListType> = [imgList[imgSize - 1]].concat(imgList).concat([imgList[0]]);
     const newImgSize: number = newImgList.length;
     const transitionTime: number = 500;
 
@@ -66,19 +66,14 @@ const Carousel = (props: propsInfoType): ReactElement => {
         setControls(convertIndex);
     }
 
-    // 定时轮播
-    // setInterval(() => {
-    //     nextFunc()
-    // }, 2000)
-
     return (
         <div className={styles.carousel}>
-            <div className={styles.carouseul} style={{ width: `${100 * newImgSize}%` }}>
+            <div className={styles.carouseul} style={{ height:`${imgHeight}px`, width: `${100 * newImgSize}%` }}>
                 {
                     newImgList.map((item, index) => {
-                        return <div className={styles.carouseli} key={index} style={{ height: `${imgHeight}px`, width: `calc(100% / ${newImgSize})`, transform: `translateX(-${animate.transform})`, transition: animate.transition }}>
+                        return <div className={styles.carouseli} key={index} style={{ width: `calc(100% / ${newImgSize})`, transform: `translateX(-${animate.transform})`, transition: animate.transition }}>
                             {
-                                item.img ? <div style={{ height:'100%', width:'100%' }}><img src={item.img} style={{  width: '100%', height:'100%' }} /></div> : <div className={styles.carouseText}>{item.state}</div>
+                                item.img ? <div className={styles.carouselImg}><img src={item.img} /></div> : <div className={styles.carouseText}>{item.state}</div>
                             }
                         </div>
                     })
