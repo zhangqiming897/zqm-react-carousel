@@ -16,7 +16,7 @@ interface propsInfoType {
 const Carousel = (props: propsInfoType): ReactElement => {
 
     // 定义props
-    const { imgArr, height, transition } = props;
+    const { imgArr, height, transition }: propsInfoType = props;
 
     // 图片高度设置
     const imgHeight: number = height ? height : 500;
@@ -24,7 +24,7 @@ const Carousel = (props: propsInfoType): ReactElement => {
     // 图片展示设置
     const imgList: Array<imgListType> = imgArr ?
         imgArr.map((item, index) => { return { state: index + 1, img: item } })
-        : new Array(3).fill(1).map((item, index) => { return { state: index + 1 } })
+        : new Array(4).fill(1).map((item, index) => { return { state: index + 1 } })
     const imgSize: number = imgList.length;
 
     // 图片无缝切换设置
@@ -48,10 +48,10 @@ const Carousel = (props: propsInfoType): ReactElement => {
         }
 
         // 设置定时器
-        let interval = setInterval(dyamicCarousel, imgDelayTime);
+        let interval: NodeJS.Timer = setInterval(dyamicCarousel, imgDelayTime);
 
         // 监听鼠标移入移出事件
-        let setListenMouser = document.getElementsByClassName(`${styles.carousel}`)[0];
+        let setListenMouser: Element = document.getElementsByClassName(`${styles.carousel}`)[0];
         // 移入
         setListenMouser.addEventListener('mouseover', () => { clearInterval(interval) });
         // 移出
