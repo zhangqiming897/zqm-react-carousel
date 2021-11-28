@@ -10,13 +10,16 @@ interface imgListType {
 interface propsInfoType {
     imgArr?: Array<string>,
     height?: number,
-    transition?: number
+    transitionTime?: number
 }
 
 const Carousel = (props: propsInfoType): ReactElement => {
 
     // 定义props
-    const { imgArr, height, transition }: propsInfoType = props;
+    const { imgArr, height, transitionTime }: propsInfoType = props;
+
+    // 过渡时间设置
+    const transitionDelay: number = transitionTime ? transitionTime / 100 : 50;
 
     // 图片高度设置
     const imgHeight: number = height ? height : 500;
@@ -30,12 +33,14 @@ const Carousel = (props: propsInfoType): ReactElement => {
     // 图片无缝切换设置
     const newImgList: Array<imgListType> = [imgList[imgSize - 1]].concat(imgList).concat([imgList[0]]);
     const newImgSize: number = newImgList.length;
-    const transitionTime: number = transition ? transition : 500;
     const imgDelayTime: number = 3000;
+
+    // 帧数效率值设置
+    let transition = 0;
 
     // 声明状态属性
     let [controls, setControls] = useState(1);
-    let [animate, setAnimate] = useState({ transform: '100%', transition: '' });
+    let [oldControls, setOldControls] = useState(1);
 
     // 生命周期
     useEffect(() => {
@@ -62,18 +67,38 @@ const Carousel = (props: propsInfoType): ReactElement => {
 
     // 轮播事件响应
     useEffect(() => {
-        setAnimate({ transform: `${100 * controls}%`, transition: `${transitionTime / 1000}s` });
-        switch (controls) {
-            case newImgSize - 1: setTimeout(() => { setAnimate({ transform: `100%`, transition: '' }) }, transitionTime); break;
-            case 0: setTimeout(() => { setAnimate({ transform: `${100 * (newImgSize - 2)}%`, transition: '' }) }, transitionTime); break;
-            default: break;
+        requestAnimationFrame(() => transitionAnimate(controls));
+    }, [controls]);
+
+    // 过渡动画
+    const transitionAnimate = (num: number) => {
+        transition += 1;
+        translateXAnimate(num, transition, transitionDelay);
+        if (transition < transitionDelay) {
+            requestAnimationFrame(() => transitionAnimate(num));
         }
-    }, [controls])
+    }
+
+    // 横向移动
+    const translateXAnimate = (controls: number, time: number, count: number) => {
+        let convert: number = 1;
+        let getCarouselis: HTMLCollectionOf<Element> = document.getElementsByClassName(`${styles.carouseli}`);
+        for (let i = 0; i < getCarouselis.length; i++) {
+            if(controls-oldControls < 0) {
+                convert = (controls - 1) % newImgSize == -1 ? imgSize : controls;
+                getCarouselis[i].setAttribute('style', `width: calc(100% / ${newImgSize}); transform: translateX(-${100 * (controls + 1) - 100 * (time / count)}%)`)
+            } else {
+                convert = (controls + 1) % newImgSize == 0 ? 1 : controls;
+                getCarouselis[i].setAttribute('style', `width: calc(100% / ${newImgSize}); transform: translateX(-${100 * (controls - 1) + 100 * (time / count)}%)`)
+            }
+        }
+        setOldControls(convert);
+    }
 
     // 返回
     const prevFunc = () => {
         let prevStep: number = (controls - 1) % newImgSize;
-        switch(prevStep) {
+        switch (prevStep) {
             case imgSize: setControls(0); break;
             case -1: setControls(imgSize - 1); break;
             default: setControls(prevStep); break;
@@ -83,8 +108,8 @@ const Carousel = (props: propsInfoType): ReactElement => {
     // 前进
     const nextFunc = () => {
         let nextStep: number = (controls + 1) % newImgSize;
-        switch(nextStep) {
-            case 1: setControls(newImgSize -1); break;
+        switch (nextStep) {
+            case 1: setControls(newImgSize - 1); break;
             case 0: setControls(2); break;
             default: setControls(nextStep); break;
         }
@@ -95,7 +120,7 @@ const Carousel = (props: propsInfoType): ReactElement => {
             <div className={styles.carouseul} style={{ height: `${imgHeight}px`, width: `${100 * newImgSize}%` }}>
                 {
                     newImgList.map((item, index) => {
-                        return <div className={styles.carouseli} key={index} style={{ width: `calc(100% / ${newImgSize})`, transform: `translateX(-${animate.transform})`, transition: animate.transition }}>
+                        return <div className={styles.carouseli} key={index}>
                             {
                                 item.img ? <div className={styles.carouselImg}><img src={item.img} /></div> : <div className={styles.carouseText}>{item.state}</div>
                             }
