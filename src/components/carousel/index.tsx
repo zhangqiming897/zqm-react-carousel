@@ -19,7 +19,7 @@ const Carousel = (props: propsInfoType): ReactElement => {
     const { imgArr, height, transitionTime }: propsInfoType = props;
 
     // 过渡时间设置
-    const transitionDelay: number = transitionTime ? transitionTime / 100 : 50;
+    const transitionDelay: number = transitionTime ? transitionTime / 100 : 30;
 
     // 图片高度设置
     const imgHeight: number = height ? height : 500;
@@ -33,7 +33,7 @@ const Carousel = (props: propsInfoType): ReactElement => {
     // 图片无缝切换设置
     const newImgList: Array<imgListType> = [imgList[imgSize - 1]].concat(imgList).concat([imgList[0]]);
     const newImgSize: number = newImgList.length;
-    const imgDelayTime: number = 3000;
+    const imgDelayTime: number = 2000;
 
     // 帧数效率值设置
     let transition = 0;
