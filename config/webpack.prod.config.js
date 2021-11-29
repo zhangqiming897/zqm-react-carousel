@@ -7,10 +7,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "production",
-  entry: path.join(__dirname, "../src/components/index.d.ts"),
+  entry: path.join(__dirname, "../src/index"),
   output: {
     filename: "index.js",
-    path: path.resolve(__dirname, "../lib"),
+    path: path.resolve(__dirname, "../dist/production"),
     libraryTarget: "umd",
     library: "ReactCmp",
   },
