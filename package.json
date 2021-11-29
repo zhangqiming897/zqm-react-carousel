@@ -4,7 +4,7 @@
   "description": "无缝轮播动画效果设置",
   "main": "dist/production/index.js",
   "files": [
-    "dist"
+    "dist/production"
   ],
   "scripts": {
     "start": "webpack-dev-server --config ./config/webpack.dev.config.js",
