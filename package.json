@@ -5,7 +5,7 @@
   "main": "dist/production/index.js",
   "files": [ 
     "dist/production",
-    "index.d.ts"
+    "src/index.d.ts"
   ],
   "scripts": {
     "start": "webpack-dev-server --config ./config/webpack.dev.config.js",
