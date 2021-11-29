@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Carousel from '@/components/carousel';
+import Carousel from '@/carousel';
 
 const App = () => {
   return <Carousel height={600} />
