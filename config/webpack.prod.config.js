@@ -7,7 +7,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "production",
-  entry: path.join(__dirname, "../src/carousel"),
+  entry: path.join(__dirname, "../src/index"),
   output: {
     filename: "index.js",
     path: path.resolve(__dirname, "../dist/production"),

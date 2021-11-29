@@ -1,6 +1,6 @@
 // 轮播图组件
 import React, { ReactElement, useState, useEffect } from 'react';
-import styles from './carousel.module.less';
+import styles from './index.module.less';
 
 interface imgListType {
     state: number,
