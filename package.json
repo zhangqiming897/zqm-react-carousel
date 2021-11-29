@@ -2,9 +2,9 @@
   "name": "zqm-react-carousel",
   "version": "1.2.2",
   "description": "无缝轮播动画效果设置",
-  "main": "lib/index.js",
+  "main": "dist/production/index.js",
   "files": [
-    "lib"
+    "dist"
   ],
   "scripts": {
     "start": "webpack-dev-server --config ./config/webpack.dev.config.js",
