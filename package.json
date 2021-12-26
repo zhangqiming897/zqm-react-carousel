@@ -1,6 +1,6 @@
 {
   "name": "zqm-react-carousel",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "无缝轮播动画效果设置",
   "main": "dist/production/index.js",
   "files": [ 
