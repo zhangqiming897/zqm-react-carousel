@@ -10,16 +10,26 @@ interface imgListType {
 interface propsInfoType {
     imgArr?: Array<string>,
     height?: number,
-    transitionTime?: number
+    transitionTime?: number,
+    prevIcon?: string,
+    nextIcon?: string,
+    iconSize?: number,
+    configType?: string
 }
 
 const Carousel = (props: propsInfoType): ReactElement => {
 
     // 定义props
-    const { imgArr, height, transitionTime }: propsInfoType = props;
+    const { imgArr, height, transitionTime, prevIcon, nextIcon, iconSize, configType }: propsInfoType = props;
 
     // 过渡时间设置
     const transitionDelay: number = transitionTime ? transitionTime / 100 : 30;
+
+    // 图标大小设置
+    const setIconSize: number = iconSize ? iconSize : 45;
+
+    // 底部操作栏配置项 ( square, circle )
+    const setConfigType: string = configType ? configType : 'square';
 
     // 图片高度设置
     const imgHeight: number = height ? height : 500;
@@ -128,16 +138,24 @@ const Carousel = (props: propsInfoType): ReactElement => {
                     })
                 }
             </div>
-            <div className={styles.carouselSzul} style={{ left: `calc(50% - ${82 * imgSize}px / 2)` }}>
+            <div className={styles.carouselSzul}>
                 {
                     imgList.map((item, index) => {
-                        return <div className={`${styles.carouselSzli} ${item.state == Math.abs(controls % imgSize ? controls % imgSize : imgSize) ? styles.carouselSzliActive : null}`} key={index} onClick={() => setControls(item.state)} />
+                        return <div className={`${styles.carouselSzli} ${styles[setConfigType]} ${item.state == Math.abs(controls % imgSize ? controls % imgSize : imgSize) ? styles.carouselSzliActive : null}`} key={index} onClick={() => setControls(item.state)} />
                     })
                 }
             </div>
             <div className={styles.carouselCz}>
-                <p onClick={prevFunc}>返回</p>
-                <p onClick={nextFunc}>前进</p>
+                <p onClick={prevFunc}>
+                    {
+                        prevIcon ? <span className={`iconfont ${prevIcon}`} style={{ fontSize: setIconSize }}></span> : '返回'
+                    }
+                </p>
+                <p onClick={nextFunc}>
+                    {
+                        nextIcon ? <span className={`iconfont ${nextIcon}`} style={{ fontSize: setIconSize }}></span> : '前进'
+                    }
+                </p>
             </div>
         </div>
     )

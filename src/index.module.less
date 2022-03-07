@@ -31,22 +31,28 @@
   color: #fff;
 }
 .carouselSzul {
-  position: absolute;
-  bottom: 20px;
-  display: flex;
+  display: inline-flex;
+  justify-content: center;
+  transform: translateY(-50px);
 }
 .carouselSzul .carouselSzli {
   padding: 4px;
   margin: 10px;
   border: 2px solid rgb(212, 206, 206);
+  cursor: pointer;
+}
+.square {
   width: 50px;
   border-radius: 3px;
-  cursor: pointer;
+}
+.circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
 }
 .carouselSzul .carouselSzliActive {
   background-color: #6081be;
   color: #fff;
-  border-radius: 3px;
 }
 .carouselCz {
   display: flex;
